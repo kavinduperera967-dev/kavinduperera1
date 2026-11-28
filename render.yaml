@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: portfolio
+    runtime: node
+    plan: starter            # free plan cannot keep uploads (no persistent disk)
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DATA_DIR
+        value: /data
+      - key: ADMIN_PIN
+        sync: false          # Render will ask you for this value
+    disk:
+      name: portfolio-data
+      mountPath: /data
+      sizeGB: 5
